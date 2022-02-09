@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Chat from './views/Chat';
+import Resgistro from './views/Registro';
+import useStyles from "./styles";
 
 function App() {
+  const [nombreUser, setNombre] = useState("");
+  const [registrado, setRegistrado] = useState(false);
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.container}>
+      {!registrado && (
+        <Resgistro {...{setNombre, setRegistrado, nombreUser}}/>
+      )}
+
+      {registrado && <Chat nombreUser={nombreUser} />}
     </div>
   );
 }
